@@ -86,6 +86,11 @@ int main() {
 
     printf("Digite o número de Pontos turísticos: ");
     scanf("%d", &n_pont_turisticos2);
+    
+    if (populacao1 == 0 || populacao2 == 0) {
+        printf("Acho que cidades fantasmas não podem participar!\n");
+        return 1;
+    }
 
     //Calculo de Densidade Populacional
     densidade1 = (float)populacao1 / area_cidade1;
@@ -198,9 +203,8 @@ int main() {
     //Logica de Comparação
 
     float soma1 = 0.0, soma2 = 0.0;
-    int ganhos_carta1 = 0, ganhos_carta2 = 0;
-
-    
+    int rodada1 = 0, rodada2 = 0;
+    //Carta 1 = 1; Carta 2 = 2; Empate = 0;
 
     soma1 = atributo1_carta1 + atributo2_carta1;
     soma2 = atributo1_carta2 + atributo2_carta2; 
@@ -218,20 +222,20 @@ int main() {
 
     if (escolha1 == 6){
         if (atributo1_carta1 > atributo1_carta2){
-            ganhos_carta2++;
+            rodada1 = 2;
             printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att1);
         } else if(atributo1_carta1 < atributo1_carta2){
-            ganhos_carta1++;
+            rodada1 = 1;
             printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att1);
         } else {
            printf("Na comparação do atributo %s, Deu empate!\n", escolha_att1);
         }
     } else {
         if (atributo1_carta1 > atributo1_carta2){
-            ganhos_carta1++;
+            rodada1 = 1;
             printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att1);
         } else if (atributo1_carta2 > atributo1_carta1) {
-            ganhos_carta2++;
+            rodada2 = 2;
             printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att1);
         } else {
             printf("Na comparação do atributo %s, Deu empate!\n", escolha_att1);
@@ -239,47 +243,42 @@ int main() {
     }
     if (escolha2 == 6){
         if (atributo2_carta1 > atributo2_carta2){
-            ganhos_carta2++;
+            rodada2 = 2;
             printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att2);
         } else if(atributo2_carta1 < atributo2_carta2){
-            ganhos_carta1++;
+            rodada2 = 1;
             printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att2);
         } else {
            printf("Na comparação do atributo %s, Deu empate!\n", escolha_att2);
         }
     } else {
         if (atributo2_carta1 > atributo2_carta2){
-            ganhos_carta1++;
+            rodada2 = 1;
             printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att2);
         } else if (atributo2_carta2 > atributo2_carta1) {
-            ganhos_carta2++;
+            rodada2 = 2;
             printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att2);
         } else {
             printf("Na comparação do atributo %s, Deu empate!\n", escolha_att2);
         }
     }
     
+    printf("\n--- Vencedor da Rodada --- \n");    
+    if (rodada1 == 1 && rodada2 == 1) {
+        printf(">>> A CARTA 1 venceu a rodada (ganhou nos dois atributos)! <<<\n");    
+    } else if (rodada1 == 2 && rodada2 == 2) {
+        printf(">>> A CARTA 2 venceu a rodada (ganhou nos dois atributos)! <<<\n"); 
+    } else {
+        printf(">>> A RODADA TERMINOU EM EMPATE! <<<\n");    
+    }      
 
     if (soma1 > soma2){
         printf("Na Comparação de Soma dos atributos, Ganha a Carta 1\n");
-        ganhos_carta1++;
     } else if (soma1 < soma2){
         printf("Na Comparação de Soma dos atributos, Ganha a Carta 2\n");
-        ganhos_carta2++;
     } else {
         printf("Na Comparação de Soma dos atributos, EMPATE!\n");
     }
 
-    printf("Resultado Final: \n");
-    printf("CARTA 1: %d \n", ganhos_carta1);
-    printf("CARTA 2: %d\n", ganhos_carta2);
-
-    if(ganhos_carta1 > ganhos_carta2){
-        printf("CARTA 1 É A GANHADORA!");
-    } else if (ganhos_carta2 > ganhos_carta1){
-        printf("CARTA 2 É A GANHADORA!");
-    } else {
-        printf("Oh não! Tivemos um Empate!");
-    }
     return 0;
 }
