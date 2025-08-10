@@ -87,7 +87,8 @@ int main() {
     printf("Digite o número de Pontos turísticos: ");
     scanf("%d", &n_pont_turisticos2);
     
-    if (populacao1 == 0 || populacao2 == 0) {
+    //Retiro o jogo caso um destes seja 0, pois impossibilitaria a divisão.
+    if (populacao1 == 0 || populacao2 == 0 || area_cidade1 == 0 || area_cidade2 == 0 || pib_cidade1 == 0 || pib_cidade2 == 0) {
         printf("Acho que cidades fantasmas não podem participar!\n");
         return 1;
     }
@@ -104,7 +105,7 @@ int main() {
     int escolha1 = 0, escolha2 = 0;
     char escolha_att1[50], escolha_att2[50];
 
-    //Menu
+    //Menu 1
     printf("Escolha o PRIMEIRO atributo para comparar:\n");
     printf("1 - Nome da Cidade (Apenas para vizualização das Cartas)\n");
     printf("2 - População\n");
@@ -115,25 +116,48 @@ int main() {
     printf("Qual sua escolha: ");
     scanf("%d", &escolha1);
 
-    printf("Escolha o SEGUNDO atributo para comparar:\n");
-    if(escolha1 != 1){printf("1 - Nome da Cidade (Apenas para vizualização das Cartas)\n");}
-    if(escolha1 != 2){printf("2 - População\n");}
-    if(escolha1 != 3){printf("3 - Área\n");}
-    if(escolha1 != 4){printf("4 - PIB\n");}
-    if(escolha1 != 5){printf("5 - Número de Pontos Turísticos\n");}
-    if(escolha1 != 6){printf("6 - Densidade Demográfica\n");}
-    printf("Qual sua escolha: ");
-    scanf("%d", &escolha2);
+    //Menu 2
+    if(escolha1 != 1){
+        printf("Escolha o SEGUNDO atributo para comparar:\n");
+        if(escolha1 != 2){printf("2 - População\n");}
+        if(escolha1 != 3){printf("3 - Área\n");}
+        if(escolha1 != 4){printf("4 - PIB\n");}
+        if(escolha1 != 5){printf("5 - Número de Pontos Turísticos\n");}
+        if(escolha1 != 6){printf("6 - Densidade Demográfica\n");}
+        printf("Qual sua escolha: ");
+        scanf("%d", &escolha2);
+    }
+    
 
+    //Erro para caso o jogador escolha a mesma coisa!
     if (escolha1 == escolha2){
         printf("A escolha dos atributos não podem ser iguais \n");
         return 1; //Código de erro
     }
 
+
+    //Switch para o primeiro MENU!
     switch (escolha1)
     {
     case 1:
-        //TODO
+        printf("------------------------\n");
+        printf("Carta 1: %s%s, %s\n", estado1, codigo_carta1, nome_cidade1);
+        printf("ATRIBUTOS:\n");
+        printf("->POPULAÇÃO: %d habitantes\n", populacao1);
+        printf("->AREA: %.2f km²\n", area_cidade1);
+        printf("->PIB: %.2f Bilhões de Reaisn", pib_cidade1);
+        printf("->Numero de Pontos Turisticos: %d\n", n_pont_turisticos1);
+        printf("->Densidade Demografica: %.2f\n", densidade1);
+        printf("------------------------\n");
+        printf("->Carta 2: %s%s, %s\n", estado2, codigo_carta2, nome_cidade2);
+        printf("->ATRIBUTOS:\n");
+        printf("->POPULAÇÃO: %d habitantes\n", populacao2);
+        printf("->AREA: %.2f km²\n", area_cidade2);
+        printf("->PIB: %.2f Bilhões de Reais\n", pib_cidade2);
+        printf("->Numero de Pontos Turisticos: %d\n", n_pont_turisticos2);
+        printf("->Densidade Demografica: %.2f\n", densidade2);
+        printf("------------------------\n");
+        return 0;
         break;
     case 2:
         strcpy(escolha_att1, "População");
@@ -168,7 +192,6 @@ int main() {
     switch (escolha2)
     {
     case 1:
-        //TODO
         break;
     case 2:
         strcpy(escolha_att2, "População");
@@ -235,7 +258,7 @@ int main() {
             rodada1 = 1;
             printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att1);
         } else if (atributo1_carta2 > atributo1_carta1) {
-            rodada2 = 2;
+            rodada1 = 2;
             printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att1);
         } else {
             printf("Na comparação do atributo %s, Deu empate!\n", escolha_att1);
