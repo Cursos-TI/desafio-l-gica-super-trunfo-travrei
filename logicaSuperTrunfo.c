@@ -194,6 +194,9 @@ int main() {
     //Logica de Comparação
 
     float soma1 = 0.0, soma2 = 0.0;
+    int ganhos_carta1 = 0, ganhos_carta2 = 0;
+
+    
 
     soma1 = atributo1_carta1 + atributo2_carta1;
     soma2 = atributo1_carta2 + atributo2_carta2; 
@@ -209,14 +212,45 @@ int main() {
     printf(" -> Soma dos Atributos: %.2f\n", soma2);
     printf("--------\n");
 
-    printf("Vencedor: ");
+    if (atributo1_carta1 > atributo1_carta2){
+        ganhos_carta1++;
+        printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att1);
+    } else if (atributo1_carta2 > atributo1_carta1) {
+        ganhos_carta2++;
+        printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att1);
+    } else {
+        printf("Na comparação do atributo %s, Deu empate!\n", escolha_att1);
+    }
+    if (atributo2_carta1 > atributo2_carta2){
+        ganhos_carta1++;
+        printf("Na comparação do atributo %s, Ganha a Carta1!\n", escolha_att2);
+    } else if (atributo2_carta2 > atributo2_carta1) {
+        ganhos_carta2++;
+        printf("Na comparação do atributo %s, Ganha a Carta2!\n", escolha_att2);
+    } else {
+        printf("Na comparação do atributo %s, Deu empate!\n", escolha_att1);
+    }
+
     if (soma1 > soma2){
-        printf("Carta 1 Venceu!\n");
+        printf("Carta 1 ganha na soma!\n");
+        ganhos_carta1++;
     } else if (soma1 < soma2){
-        printf("Carta 2 Venceu!\n");
+        printf("Carta 2 ganha na soma!\n");
+        ganhos_carta2++;
     } else {
         printf("EMPATE!\n");
     }
 
+    printf("Resultado Final: \n");
+    printf("CARTA 1: %d \n", ganhos_carta1);
+    printf("CARTA 2: %d\n", ganhos_carta2);
+
+    if(ganhos_carta1 > ganhos_carta2){
+        printf("CARTA 1 É A GANHADORA!");
+    } else if (ganhos_carta2 > ganhos_carta1){
+        printf("CARTA 2 É A GANHADORA!");
+    } else {
+        printf("Oh não! Tivemos um Empate!");
+    }
     return 0;
 }
